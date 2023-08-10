@@ -1,0 +1,98 @@
+# 1. Objective:We want to evaluate if there's a significant difference 
+in the amounts spent by cardholders who received the reduced interest rate ad compared 
+to those who received the standard seasonal ad.
+
+##2. Hypothesis Setting:
+Before conducting any statistical test, we need to set our hypotheses.
+
+Null Hypothesis (H0): There is no difference in the amounts spent between the two groups.
+Alternative Hypothesis (H1): There is a significant difference in the amounts spent between
+the two groups.
+#Then we set the level of significance (LoS) (Reject region) and define the test statistic
+### The most common are 5% and 1%
+# Define the rejection criteria (reject H0 if p-value<-0.05)
+#Decision
+# conclusion
+3. Descriptive Statistics:
+Compute basic statistics for each group to understand the data distribution.
+
+# Assuming the data is loaded in a dataframe named 'data'
+standard_ad <- subset(data, insert == 0)$dollars
+reduced_interest_ad <- subset(data, insert == 1)$dollars
+
+# Mean
+cat("Standard Ad Mean:", mean(standard_ad), "\n")
+cat("Reduced Interest Ad Mean:", mean(reduced_interest_ad), "\n")
+
+# Median
+cat("Standard Ad Median:", median(standard_ad), "\n")
+cat("Reduced Interest Ad Median:", median(reduced_interest_ad), "\n")
+
+# Standard Deviation
+cat("Standard Ad Std Dev:", sd(standard_ad), "\n")
+cat("Reduced Interest Ad Std Dev:", sd(reduced_interest_ad), "\n")
+
+4. Inferential Statistics:
+#Conduct a t-test to determine if there's a statistically significant 
+  difference in the amounts spent between the two groups.
+
+
+t_test_result <- t.test(standard_ad, reduced_interest_ad)
+print(t_test_result)
+p_value <- t_test_result$p.value
+
+cat("P-value:", p_value, "\n")
+5. Interpretation:
+  Based on the p-value from the t-test:
+  
+ #(1) If p-value < 0.05 (assuming a 5% significance level), we reject the null 
+  hypothesis and conclude that there's a significant difference in the amounts spent between the two groups.
+ #(2) If p-value >= 0.05, we fail to reject the null hypothesis, suggesting that there's no significant difference in the amounts spent between the two groups.
+Conclusion:
+  
+  Statistical Significance: Based on the t-test, there is a statistically significant difference 
+in the amounts spent by cardholders who received the reduced interest rate ad compared to those who 
+received the standard seasonal ad. This is because our p-value is less than the 5% significance level.
+
+Practical Implication: The reduced interest rate promotion appears to have a different effect 
+on spending compared to the standard seasonal ad. The company should consider the magnitude of 
+this difference (effect size) to determine if the promotion is practically significant.
+If the difference in spending is substantial, the reduced interest rate promotion might be 
+a more effective strategy to encourage spending among cardholders.
+
+##Recommendation: Given the statistical evidence, the retail department store might consider 
+using the reduced interest rate promotion more widely or further investigating the factors 
+that made it effective. However, it's also essential to consider other business metrics, like 
+profitability, to ensure the promotion is beneficial overall.
+
+##Further Analysis: While the t-test provides evidence of a difference, it would be beneficial to further 
+analyze the data. For instance, understanding the distribution of spending within each group, 
+considering other external factors that might have influenced spending, or conducting follow-up 
+experiments can provide a more comprehensive view of the promotion's impact.##
+
+
+
+
+
+
+
+6. Visual Analysis:
+  Visualize the data to get a better understanding of the distribution and spread.
+
+# Histograms
+hist(standard_ad, main="Histogram for Standard Ad", col=rgb(0.2,0.8,0.5,0.5), xlim=c(min(data$dollars), max(data$dollars)))
+hist(reduced_interest_ad, main="Histogram for Reduced Interest Ad", col=rgb(0.8,0.2,0.5,0.5), xlim=c(min(data$dollars), max(data$dollars)))
+
+# Boxplots
+boxplot(standard_ad, reduced_interest_ad, names=c("Standard Ad", "Reduced Interest Ad"), main="Boxplot of Amounts Spent")
+7. Conclusion:
+  Based on the results of the t-test and the visual analysis, draw a conclusion about the effectiveness of the reduced interest rate ad compared to the standard seasonal ad.
+
+Remember, while statistical significance can indicate whether there's a difference between groups, it doesn't necessarily imply practical significance. The magnitude of the difference (effect size) and its business implications should also be considered.
+
+This comprehensive analysis will provide the analyst with a clear understanding of the impact of the credit card promotion.
+
+
+
+
+
